@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/misc.css">
+    <link rel="stylesheet" href="css/tab.css">
+</head>
+<body>
+    <div>
+        <h2>&nbsp JAMR IMS</h2>
+        <p>&nbsp Welcome to the main menu! Please find the different selections below.</p>
+    </div>
+
+    <div class="tab">
+        <button class="tablinks" onclick="tabAccess(event, 'Welcome')" id="defaultOpen">Welcome</button>
+        <button class="tablinks" onclick="tabAccess(event, 'LogInOut')" id="loginTabButton">Login / Logout</button>
+        <button class="tablinks" onclick="tabAccess(event, 'Account')" id="accSetButton">Account Settings</button>
+        <button class="tablinks" onclick="tabAccess(event, 'Item')" id="itemsTabButton">Items</button>
+        <button class="tablinks" onclick="tabAccess(event, 'Store')" id="storesTabButton">Stores</button>
+        <button class="tablinks" onclick="tabAccess(event, 'Inventory')" id="invTabButton">Inventories</button>
+        <button class="tablinks" onclick="tabAccess(event, 'ShoppingList')" id="shoppinListButton">Shopping Lists</button>
+        <button class="tablinks" onclick="tabAccess(event, 'Alert')" id="alertsTabButton">Alerts</button>
+    </div>
+
+    <div id="Welcome" class="tabcontent">
+        <div>
+            <h3>Introduction</h3>
+            <p>
+                JAMR Kitchen IMS (JKI) is an inventory management system developed by JAMR Software Solutions. 
+                Its main goal is to help users track and restock foodstuffs in domestic, or small commercial, kitchens and pantries.
+                Users will be able to create (1) inventory databases to represent actual kitchens and (2) entries in those databases to represent actual foodstuffs.
+                Users will be able to view these representations and track the names, quantities, prices, purchase locations, expiration dates, categories, and notes that they have given them. 
+                Using this information, users will be able to create digital shopping lists to help them plan to stock, or restock, their kitchens, updating their inventories afterward.
+                Users will be able to share their inventories and shopping lists with other users, fostering communication and collaboration.
+            </p>
+        </div>
+        <div>
+            <h3>About Us</h3>
+            <p>
+                We are a team of Computer Science & Software Engineering students at the University of Michigan-Dearborn dedicated to creating an innovative web application for our clients. 
+                With our experience and passion for software design and implementation, we hope that our IMS system fulfills all of your kitchen management needs.
+            </p>
+        </div>
+        <div>
+            <h3>Contact</h3>
+            <P>
+                JAMR Software Solutions<br>
+                (313) 833-9505<br>
+                18525 Northview Street, Dearborn, MI 48120
+            </P>
+        </div>
+        <div>
+            <h3>Team Members</h3>
+            Javid Ditty, Mohamad Elzaatari, Ryan Len, Andre Floyd
+        </div>
+        <!--  The logo and mission statement at the bottom of the screen -->
+        <div id="mission">
+            <h3>
+                "Streamlining kitchen operations, from stockroom to plate with<br>
+                our innovative kitchen inventory management solution!"
+            </h3>
+            <img id="logo" src="img/jamr-logo.png" alt="JAMR Logo">
+        </div>
+    </div>
+
+    <div id="LogInOut" class="tabcontent">
+        <h3>Login / Logout:</h3>
+        <label for="userNameEnt"><b>Enter Username: </b></label>
+        <input type="text" id="userNameEnt" placeholder="Enter Username" iname="userNameEnt" required><br><br>
+        <label for="passwordEnt"><b>Enter Password: </b></label>
+        <input type="text" id="passwordEnt" placeholder="Enter Password" iname="passwordEnt" required><br><br>
+        <div class="interiorTabs">
+            <label id="LoginPageStatus"><b></b></label><br><br>
+            <button onclick="login('LoginPageStatus')">Log in</button><br>
+            <button onclick="logout('LoginPageStatus')">Log out</button><br>
+            <button onclick="createAccount('LoginPageStatus')">Create Account</button><br>
+        </div>
+    </div>
+
+    <div id="Account" class="tabcontent">
+        <h3>Account:</h3>
+        <label for="OldPass"><b>Enter Old Password: </b></label>
+        <input type="text" id="OldPass" placeholder="Enter Old Password" iname="OldPass" required><br><br>
+        <label for="NewPass"><b>Enter New Password: </b></label>
+        <input type="text" id="NewPass" placeholder="Enter New Password" iname="NewPass" required><br><br>
+        <label for="NewPassAgain"><b>Enter New Password Again: </b></label>
+        <input type="text" id="NewPassAgain" placeholder="Enter New Password Again" iname="NewPassAgain" required><br><br>
+        <div class="interiorTabs">
+            <label id="passChangeStatus"><b></b></label><br><br>
+            <button onclick="changePassword('passChangeStatus')">Change Password</button><br>
+            <button onclick="deleteAccount('LoginPageStatus')">Delete Account</button><br>
+        </div>
+    </div>
+
+    <div id="Item" class="tabcontent">
+        <h3>Items:</h3>
+
+        <table id="Titles">
+            <table style="float: left;">
+                <tbody>
+                    <tr style="background-color: lightgrey">
+                        <td style="width: 15%">ID</td>
+                        <td style="width: 15%">NAME</td>
+                        <td style="width: 15%">CATEGORIES</td>
+                        <td style="width: 15%">NOTES</td>
+                        <td style="width: 5%">SELECT</td><!-- for checkbox-->
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 2nd table, where item info is displayed-->
+            <table id="dataTable1">
+                <tbody>
+                    <!-- Empty because "addItem" adds rows in here-->
+                </tbody>
+            </table><br><br>
+
+            <label for="iname"><b>Name: </b></label>
+            <input type="text" id="iname"><br><br>
+
+            <label for="categ"><b>Category: </b></label>
+            <input type="text" id="category"><br><br>
+
+            <label for="notes"><b>Notes: </b></label>
+            <input type="text" id="notes"><br><br>
+
+            <div class="interiorTabs">
+                <button onclick="addItem('dataTable1')">Add item</button><br>
+                <button onclick="deleteCheckedWithRefresh('dataTable1', 'items', 'itemID', 'itemsTabButton')">Delete item</button><br>
+            </div>
+    </div>
+
+    <div id="Store" class="tabcontent">
+        <h3>Stores:</h3>
+        
+        <!-- Orignial table was split into 2 sections for conveniency/functionability-->
+        <!-- First table, purely for layout of rows/cols-->
+        <table id="storesTable"></table>
+        <table style="float: left;">
+            <tbody>
+                <tr style="background-color: lightgrey">
+                    <td style="width: 15%">STORE ID</td>
+                    <td style="width: 15%">NAME</td>
+                    <td style="width: 15%">LOCATION</td>
+                    <td style="width: 5%">SELECT</td><!-- for checkbox-->
+                    <td style="width: 5%">DISPLAY</td><!-- for radiobutton-->
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 2nd table, where Store info is displayed-->
+        <table id="dataTableStores">
+            <tbody>
+                <!-- Empty because "Add store" adds rows in here-->
+            </tbody>
+        </table><br><br>
+
+        <label for="sname"><b>Name: </b></label>
+        <input type="text" id="sname"><br><br>
+
+        <label for="SLoc"><b>Location: </b></label>
+        <input type="text" id="SLoc"><br><br>
+        <div class="interiorTabs">
+            <button onclick="addStore('dataTableStores')">Add Store</button><br>
+            <button onclick="deleteCheckedWithRefresh('dataTableStores', 'stores', 'storeID', 'storesTabButton')">Delete Store</button><br>
+        </div>
+
+        <!-- items table -->
+        <h3>Prices:</h3>
+        <table id="itemsTable">
+        <table style="float: left;">
+            <tbody>
+                <tr style="background-color: lightgrey">
+                    <td style="width: 15%">PRICE ID</td>
+                    <td style="width: 15%">NAME</td>
+                    <td style="width: 15%">PRICE</td>
+                    <td style="width: 5%">SELECT</td><!-- for checkbox-->
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- table, where store items are displayed-->
+        <table id="dataTableItems">
+            <tbody>
+                <!-- Empty because "display store items or add items" adds rows in here-->
+            </tbody>
+        </table><br><br>
+
+        <!-- change item name to dropbox and give it values -->
+        <label for="itemFromList"><b>Item: </b></label>
+        <select name="itemFromList" id="itemFromList">
+            <option value="" disabled selected hidden></option>
+        </select><br><br>
+
+        <label for="itemPrice"><b>Price: </b></label>
+        <input type="text" id="itemPrice"><br><br>
+        <label id="addPriceStatus"></label><br><br>
+
+        <div class="interiorTabs">
+            <button id="storeAddPriceBtn" onclick="addStorePrice('dataTableItems')">Add Item</button><br>
+            <button id="storeDeletePriceBtn"onclick="deleteCheckedWithRefresh('dataTableItems', 'prices', 'priceID', 'storesTabButton')">Delete Item</button><br>
+        </div>
+    </div>
+
+    <div id="Inventory" class="tabcontent">
+        <h3>Inventories:</h3>
+
+        <!-- Table for inventory-->
+        <table id="inventory">
+            <tbody>
+                <tr style="background-color: lightgrey">
+                    <td style="width: 20%">INVENTORY ID</td>
+                    <td style="width: 20%">OWNER</td>
+                    <td style="width: 20%">NAME</td>
+                    <td style="width: 5%">SELECT</td>
+                    <td style="width: 5%">DISPLAY</td>
+                    <!-- "Create inventory" adds rows in here-->
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 2nd table, where inventory info is displayed-->
+        <table id="dataTableInventories">
+            <tbody>
+                <!-- Empty because "Add store" adds rows in here-->
+            </tbody>
+        </table><br><br>
+
+        <label for="invName"><b>Name: </b></label>
+        <input type="text" id="invName"><br><br>
+
+        <div class="interiorTabs">
+            <button onclick="createInventory('dataTableInventories')"> Create Inventory</button><br>
+            <button onclick="deleteCheckedWithRefresh('dataTableInventories', 'inventories', 'inventoryID', 'invTabButton')">Delete Inventory</button>
+        </div>
+        <br> <br>
+
+        <h3>Stocks:</h3>
+        <!-- Table for inventory items-->
+        <table id="invItems">
+            <tbody>
+                <tr style="background-color: lightgrey">
+                    <td style="width: 20%">STOCK ID</td>
+                    <td style="width: 20%">NAME</td>
+                    <td style="width: 20%">QUANTITY</td>
+                    <td style="width: 20%">EXPIRATION DATE</td>
+                    <td style="width: 5%">SELECT</td>
+                    <!-- "Add inventory item" adds rows in here-->
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- table, where inventory items are displayed-->
+        <table id="dataInvItems">
+            <tbody>
+                <!-- Empty because "display inventory items or add items" adds rows in here-->
+            </tbody>
+        </table><br><br>
+
+        <!-- change item name to dropbox and give it values -->
+        <label for="invItemSelect"><b>Item: </b></label>
+        <select name="invItemSelect" id="invItemSelect">
+            <option value="" disabled selected hidden></option>
+        </select><br><br>
+
+        <label for="quantity"><b>Quantity: </b></label>
+        <input type="text" id="quantity"><br><br>
+
+        <label for="expDate"><b>Expiration Date: </b></label>
+        <input type="text" id="expDate"><br>
+        <p>* Date Format: YYYY-MM-DD</p>
+        <label id="stockAddStatus"></label><br><br>
+        
+        <div class="interiorTabs">
+            <button id="addStockBtn" onclick="addStock('dataInvItems')">Add Inventory Item</button><br>
+            <button id="deleteStockBtn" onclick="deleteCheckedWithRefresh('dataInvItems', 'stocks', 'stockID', 'invTabButton')">Delete Inventory Item</button><br>
+        </div><br>
+
+        <h3>Shares:</h3>
+        <table id="share">
+            <tbody>
+                <tr style="background-color: lightgrey">
+                    <td style="width: 20%">SHARE ID</td>
+                    <td style="width: 20%">USERNAME</td>
+                    <td style="width: 20%">INVENTORY ID</td>
+                    <td style="width: 20%">INVENTORY NAME</td>
+                    <td style="width: 5%">SELECT</td>
+                    <!-- "Add inventory item" adds rows in here-->
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- table, where shared inventories are displayed-->
+        <table id="dataInvShares">
+            <tbody></tbody>
+        </table><br><br>
+
+        <label for="accName"><b>Username: </b></label>
+        <input type="text" id="accName"><br><br>
+
+        <label for="invShareSelect"><b>Inventory: </b></label>
+        <select name="invShareSelect" id="invShareSelect">
+            <option value="" disabled selected hidden></option>
+        </select><br><br>
+
+        <div class="interiorTabs">
+            <button onclick="addInventoryShare('dataInvShares')">Share</button><br>
+            <button onclick="deleteCheckedWithRefresh('dataInvShares', 'shares', 'shareID', 'invTabButton')">Unshare</button><br>
+        </div>
+    </div>
+
+    <div id="ShoppingList" class="tabcontent">
+        <h3>Shopping Lists:</h3>
+
+        <table id="shoppingListTable">
+            <tbody>
+                <tr style="background-color: lightgrey">
+                    <td style="width: 20%">SHOPPING LIST ID</td>
+                    <td style="width: 20%">OWNER</td>
+                    <td style="width: 20%">NAME</td>
+                    <td style="width: 5%">SELECT</td>
+                    <td style="width: 5%">DISPLAY</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table id="dataTableShoppingList">
+            <tbody>
+            </tbody>
+        </table><br><br>
+
+        <label for="shoppingListName"><b>Name: </b></label>
+        <input type="text" id="shoppingListName"><br><br>
+
+        <div class="interiorTabs">
+            <button onclick="createShoppingList('dataTableShoppingList')">Create Shopping List</button><br>
+            <button onclick="deleteCheckedWithRefresh('dataTableShoppingList', 'shopping', 'shoppingListID', 'shoppinListButton')">Delete Shopping List</button>
+        </div><br><br>
+
+
+
+        <h3>Desirables:</h3>
+
+        <table id="desirableTable">
+            <tbody>
+                <tr style="background-color: lightgrey">
+                    <td style="width: 19%">DESIRABLE ID</td>
+                    <td style="width: 19%">NAME</td>
+                    <td style="width: 19%">STORE</td>
+                    <td style="width: 19%">QUANTITY</td>
+                    <td style="width: 19%">UNIT PRICE</td>
+                    <td style="width: 19%">TOTAL PRICE</td>
+                    <td style="width: 5%">SELECT</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table id="dataTableDesirable">
+            <tbody>
+            </tbody>
+        </table><br><br>
+
+        <label for="desirableSelect"><b>Item: </b></label>
+        <select name="desirableSelect" id="desirableSelect">
+            <option value="" disabled selected hidden></option>
+        </select><br><br>
+
+        <label for="desirableStoreSelect"><b>Store: </b></label>
+        <select name="desirableStoreSelect" id="desirableStoreSelect">
+            <option value="" disabled selected hidden></option>
+        </select><br><br>
+
+        <label for="desirableQuantity"><b>Quantity: </b></label>
+        <input type="text" id="desirableQuantity"><br><br>
+
+        <div class="interiorTabs">
+            <button id="addDesirableBtn" onclick="addDesirable('dataTableDesirable')">Add Item</button><br>
+            <button id="deleteDesirableBtn" onclick="deleteCheckedWithRefresh('dataTableDesirable', 'desirables', 'desirableID', 'shoppinListButton')">Delete Item</button><br>
+            <button id="checkDesirableBtn" onclick="toggleDesirableStrikeout('dataTableDesirable')">Strike/Unstrike Item</button><br>
+        </div><br>
+
+
+
+        <h3>Share:</h3>
+
+        <table id="shoppingListShareTable">
+            <tbody>
+                <tr style="background-color: lightgrey">
+                    <td style="width: 20%">SHARE ID</td>
+                    <td style="width: 20%">USERNAME</td>
+                    <td style="width: 20%">SHOPPING LIST ID</td>
+                    <td style="width: 20%">SHOPPING LIST NAME</td>
+                    <td style="width: 5%">SELECT</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- table, where shared inventories are displayed-->
+        <table id="dataTableShoppingListShares">
+            <tbody></tbody>
+        </table><br><br>
+
+        <label for="shoppingListAccountName"><b>Username: </b></label>
+        <input type="text" id="shoppingListAccountName"><br><br>
+
+        <label for="shoppingListShareSelect"><b>Shopping List: </b></label>
+        <select name="shoppingListShareSelect" id="shoppingListShareSelect">
+            <option value="" disabled selected hidden></option>
+        </select><br><br>
+
+        <div class="interiorTabs">
+            <button onclick="addShoppingListShare('dataTableShoppingListShares')">Share</button><br>
+            <button onclick="deleteCheckedWithRefresh('dataTableShoppingListShares', 'shares', 'shareID', 'shoppinListButton')">Unshare</button><br>
+        </div>
+    </div>
+
+    <div id="Alert" class="tabcontent">
+        <h3>Alerts:</h3>
+
+        <h4>Triggered Alerts:</h4>
+        <table id="Titles">
+            <table style="float: left;">
+                <tbody>
+                    <tr style="background-color: lightgrey">
+                        <td>ALERT ID</td>
+                        <td>INVENTORY NAME</td>
+                        <td>ITEM NAME</td>
+                        <td>TRIGGER</td>
+                        <td>THRESHOLD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </table>
+
+        <table id="dataTableTriggeredAlerts">
+            <tbody>
+                <tr>
+                </tr>
+            </tbody>
+        </table><br><br>
+
+        <h4>All Alerts:</h4>
+        <table id="Titles">
+            <table style="float: left;">
+                <tbody>
+                    <tr style="background-color: lightgrey">
+                        <td>ALERT ID</td>
+                        <td>INVENTORY NAME</td>
+                        <td>ITEM NAME</td>
+                        <td>TRIGGER</td>
+                        <td>TRESHOLD</td>
+                        <td>SELECT</td><!-- for checkbox-->
+                    </tr>
+                </tbody>
+            </table>
+        </table>
+
+        <table id="dataTableAllAlerts">
+            <tbody>
+                <tr>
+                </tr>
+            </tbody>
+        </table><br><br>
+
+        <label for="alertInventorySelect"><b>Inventory: </b></label>
+        <select name="alertInventorySelect" id="alertInventorySelect">
+            <option value="" disabled selected hidden></option>
+        </select><br><br>
+
+        <label for="alertItemSelect"><b>Item: </b></label>
+        <select name="alertItemSelect" id="alertItemSelect">
+            <option value="" disabled selected hidden></option>
+        </select><br><br>
+
+        <label for="alertTrigger"><b>Trigger: </b></label>
+        <select name="alertTrigger" id="alertTrigger">
+            <option value="" disabled selected hidden></option>
+            <option value="quantity">Quantity</option>
+            <option value="date">Date</option>
+        </select><br><br>
+
+        <label for="alertThreshold"><b>Threshold: </b></label>
+        <input type="text" id="alertThreshold"><br>
+        <p>* Date Format: YYYY-MM-DD</p>
+
+        <label id="alertAddStatus"></label>
+
+        <div class="interiorTabs">
+            <button onclick="addAlert('dataTableAllAlerts')">Add Alert</button><br>
+            <button onclick="deleteCheckedWithRefresh('dataTableAllAlerts', 'alerts', 'alertID', 'alertsTabButton')">Delete Alert</button><br>
+        </div>
+    </div>
+
+    <script src="js/tab.js" type="application/javascript"></script>
+    <script src="js/misc.js" type="application/javascript"></script>
+    <script src="js/account.js" type="application/javascript"></script>
+    <script src="js/item.js" type="application/javascript"></script>
+    <script src="js/store.js" type="application/javascript"></script>
+    <script src="js/inventory.js" type="application/javascript"></script>
+    <script src="js/shoppingList.js" type="application/javascript"></script>
+    <script src="js/alert.js" type="application/javascript"></script>
+</body>
+</html>
